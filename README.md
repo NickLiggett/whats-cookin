@@ -4,7 +4,7 @@
   - HTML was written for the framework, CSS for personal styling, and Javascript for all functionality including DOM manipulation.
 
 ## Application in Action
-![app gif](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/what-cookin-gif.gif)
+![cookin](https://user-images.githubusercontent.com/100492419/179614229-2c543aff-473b-445e-80d7-c77cfb87f332.gif)
 
 ## Technologies
   - Javascript
@@ -16,11 +16,11 @@
   - GlideJS
 
 ## Illustrations
-![homepage](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.18%20PM.png)
+![Screen Shot 2022-07-18 at 2 44 21 PM](https://user-images.githubusercontent.com/100726140/179614080-9f5997cb-10f6-4899-aba9-0f7a75e2597c.png)
 
-![view-all](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.35%20PM.png)
+![Screen Shot 2022-07-18 at 2 46 13 PM](https://user-images.githubusercontent.com/100726140/179614331-1ffd2915-8982-4ac0-ac97-6c2b02263e20.png)
 
-![favorites-page](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.50%20PM.png)
+![Screen Shot 2022-07-18 at 2 47 03 PM](https://user-images.githubusercontent.com/100726140/179614428-80ea10f6-790b-45f5-88d8-67e2e533a684.png)
 
 
 ## Goals, Challenges, and Wins
