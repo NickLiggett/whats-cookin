@@ -4,7 +4,7 @@
   - HTML was written for the framework, CSS for personal styling, and Javascript for all functionality including DOM manipulation.
 
 ## Application in Action
-![app gif](.src/images/what-cookin-gif.gif)
+![app gif](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/what-cookin-gif.gif)
 
 ## Technologies
   - Javascript
@@ -16,11 +16,11 @@
   - GlideJS
 
 ## Illustrations
-![homepage](.src/images/Screen Shot 2022-07-17 at 9.30.18 PM.png)
+![homepage](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.18%20PM.png)
 
-![view-all](.src/images/Screen Shot 2022-07-17 at 9.30.35 PM.png)
+![view-all](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.35%20PM.png)
 
-![favorites-page](.src/images/Screen Shot 2022-07-17 at 9.30.50 PM.png)
+![favorites-page](https://github.com/NickLiggett/whats-cookin/blob/c2ffca0221c0a3d64ac367e9fdc967921ea1f9ee/src/images/Screen%20Shot%202022-07-17%20at%209.30.50%20PM.png
 
 
 ## Goals, Challenges, and Wins
