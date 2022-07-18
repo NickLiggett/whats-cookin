@@ -187,7 +187,7 @@ describe('User', () => {
     it('should be a function', () => {
         expect(User).to.be.a('function');
     })
-    
+
     it('should be an instance of recipe', () => {
         expect(user).to.be.an.instanceof(User)
     })
@@ -199,10 +199,6 @@ describe('User', () => {
     it('should have an id', () => {
         expect(user.id).to.equal(420)
     })
-
-    // it('should have a pantry, () => {
-    //     expect(users.pantry).to.equal('')
-    // })
 
     it('should be able to add and remove recipes to cook', () => {
         expect(user.recipesToCook).to.deep.equal([])
@@ -225,6 +221,4 @@ describe('User', () => {
         expect(user.recipesToCook).to.deep.equal([recipe1, recipe2])
         expect(user.userFilterNames('Dirty')).to.deep.equal([recipe2])
     }) 
-
-
 })

@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import Ingredient from '../src/classes/ingredient';
 import Recipe from '../src/classes/recipe';
 
-
 describe('Recipe', () => {
     let recipe;
     let ingredient1;
@@ -11,7 +10,7 @@ describe('Recipe', () => {
     let recDataSet;
     let recipeDetails;
 
-    beforeEach(() => {
+  beforeEach(() => {
       ingredient1 =     {
         "id": 20081,
         "name": "wheat flour",
@@ -22,7 +21,6 @@ describe('Recipe', () => {
         "name": "bicarbonate of soda",
         "estimatedCostInCents": 582
       }
-      
       ingDataSet = [ingredient1, ingredient2]
       recipeDetails = {"id": 595736,
       "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
