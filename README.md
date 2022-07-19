@@ -2,6 +2,15 @@
   - This project was a group assignment for Turing School of Software and Design's Front End Module 2.  We created a recipe website called What's Cookin'! When the browser loads, the user is taken to a home page where they can explore a recipe library, refine their search for specific recipes based on the tags or names.  The user is also able to add and remove their favorite recipes to a favorite recipes list.
   - A recipe card will load with the ingredients list, total cost of the ingredients and recipe directions.
   - HTML was written for the framework, CSS for personal styling, and Javascript for all functionality including DOM manipulation.
+  
+## Setup
+Copy, paste, and run this code-block in your terminal to checkout our site.  
+ ```
+ git clone git@github.com:NickLiggett/whats-cookin.git
+cd whats-cookin
+cd dist
+open index.html
+```
 
 ## Application in Action
 ![cookin](https://user-images.githubusercontent.com/100492419/179614229-2c543aff-473b-445e-80d7-c77cfb87f332.gif)
