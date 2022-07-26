@@ -316,13 +316,19 @@ function favoriteFilterByName(event) {
 
 function userPantryIngredients() {
   pantryContainer.innerHTML = ''
+  let ingredientUnit;
   const userPantryIngs = newUser.pantry.map(pantryIngredient => {
     ingredientsData.forEach(ingredient => {
       if(ingredient.id === pantryIngredient.ingredient) {
-        pantryContainer.innerHTML += `<input type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
-    <button id="increment">+</button>
-    <button id="decrement">-</button>
-    <label for="${ingredient.name}">${ingredient.name}</label><br>`
+        recipeData.forEach(recipe => {
+          recipe.ingredients.find(element => {
+            if(ingredient.id === element.id) {
+              ingredientUnit = element.quantity.unit
+            }
+          })
+          })
+        pantryContainer.innerHTML += `<input class="pantry-list "type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
+    <label for="${ingredient.name}">${ingredientUnit} ${ingredient.name}</label><br>`
     //console.log('ing name', ingredient)
       }
     })
