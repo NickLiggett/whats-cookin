@@ -10,24 +10,24 @@ class Recipe {
     }
 
     determineIngredientNames() {
-        let listOfNames = []
-        let ingredientNames = this.ingredients.forEach(ingredient => {
+        let reduced = this.ingredients.reduce((list, ingredient) => {
             this.ingData.forEach(element => {
                 if (element.id === ingredient.id) {
                     if (ingredient.quantity.amount % 1 === 0) {
-                        listOfNames.push(`${element.name}: ${ingredient.quantity.amount} ${ingredient.quantity.unit}`)                       
+                        list.push(`${element.name}: ${ingredient.quantity.amount} ${ingredient.quantity.unit}`)                       
                     } else {
-                        listOfNames.push(`${element.name}: ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}`)
+                        list.push(`${element.name}: ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}`)
                     }
                 }
             })
-        })
-        return listOfNames.join('\n')
+            return list
+        }, []).join('\n')
+        return reduced
     }
 
     determineCostOfAllIngredients() {
         let totalCost = 0
-        let getTotalCost = this.ingredients.forEach(ingredient => {
+        this.ingredients.forEach(ingredient => {
             this.ingData.forEach(element => {
                 if (ingredient.id === element.id) {
                     totalCost += ingredient.quantity.amount * element.estimatedCostInCents  

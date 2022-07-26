@@ -1,4 +1,4 @@
-import RecipeRepository from './RecipeRepository';
+// import RecipeRepository from './RecipeRepository';
 
 class User {
     constructor(users) {
@@ -18,22 +18,44 @@ class User {
     }
 
     userFilterTags(tag) {
-      let filteredByTag = this.recipesToCook.filter(recipe => {
+      return this.recipesToCook.filter(recipe => {
         if (recipe.tags.includes(tag)) {
           return recipe
         }
       })
-        return filteredByTag
     }
 
     userFilterNames(name) {
-      let filteredByName = this.recipesToCook.filter(recipe => {
+      return this.recipesToCook.filter(recipe => {
         if (recipe.name.toLowerCase().includes(name.toLowerCase())) {
           return recipe
         }
       })
-        return filteredByName
-      }
+     }
+
+      checkPantry(recipe) {
+        return recipe.ingredients.reduce((list, ingredient) => {
+          this.pantry.forEach(element => {
+            if (element.ingredient === ingredient.id) {
+              let name
+              recipe.ingData.forEach(ing => {
+                if (element.ingredient === ing.id) {
+                  name = ing.name
+                }
+              })
+              if (element.amount <= ingredient.quantity.amount) {
+                list.push(`You have enough ${name}!`)
+              } else {
+                list.push(`You need ${element.amount - ingredient.quantity.amount} ${ingredient.quantity.unit} ${name}!`)
+              }
+            }
+        })
+          return list
+        }, [])
     }
+   }
+  
+
+ 
 
 export default User

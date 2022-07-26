@@ -1,18 +1,46 @@
 import { expect } from 'chai';
 import User from '../src/classes/user-class';
 import RecipeRepository from '../src/classes/RecipeRepository'
+import Recipe from '../src/classes/recipe';
 
 describe('User', () => {
     let user;
     let user1;
+    let userPantry;
     let recipe1;
     let recipe2;
     let recipeRepo;
     let recDataSet;
+    let ingDataSet;
+    let newRecipe;
 
     beforeEach(() => {
-        user1 =  { "name": "Dirty Steve", "id": 420 }
+        user1 =  { "name": "Dirty Steve", "id": 420, "pantry": userPantry}
         user = new User(user1)
+        
+        userPantry = [{
+          "ingredient": 20081,
+          "amount": 1
+        }, {
+          "ingredient": 18372,
+          "amount": 3
+        }, {
+          "ingredient": 1123,
+          "amount": 8
+        }]    
+        ingDataSet = [{
+          "id": 20081,
+          "name": "wheat flour",
+          "estimatedCostInCents": 142
+        }, {
+          "id": 18372,
+          "name": "bicarbonate of soda",
+          "estimatedCostInCents": 582
+        }, {
+          "id": 1123,
+          "name": "eggs",
+          "estimatedCostInCents": 472
+        }]
         recipe1 = { "id": 595736,
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
     "ingredients": [
@@ -179,8 +207,10 @@ describe('User', () => {
         "sauce"
       ]
     }
+    
     recDataSet = [recipe1, recipe2];
     recipeRepo = new RecipeRepository(recDataSet);
+    newRecipe = new Recipe(recipe1, ingDataSet)
 
     })
 
@@ -220,5 +250,10 @@ describe('User', () => {
         user.addRecipeToCook(recipe2)
         expect(user.recipesToCook).to.deep.equal([recipe1, recipe2])
         expect(user.userFilterNames('Dirty')).to.deep.equal([recipe2])
-    }) 
+    })
+    
+    it('should be able to determine whether a users pantry has enough ingredients to cook a given recipe', () => {
+      let e = user.checkPantry(newRecipe)
+      expect(e).to.deep.equal(['You have enough wheat flour!', 'You need 2.5 tsp bicarbonate of soda!', 'You need 7 large eggs!'])
+    })
 })
