@@ -245,7 +245,7 @@ function createTags(tagContainer) {
     return getRecipeTags.indexOf(recipe) === index;
   })
   tagContainer.innerHTML = ''
-  const recipeTags = uniqueTags.forEach(tag => {
+  uniqueTags.forEach(tag => {
     tagContainer.innerHTML += `<input type="checkbox" id="${tag}" unchecked>
       <label for="${tag}">${tag}</label><br>`
   })
