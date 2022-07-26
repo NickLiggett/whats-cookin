@@ -48,6 +48,7 @@ const searchButton = document.querySelector(".search-button")
 const searchButton2 = document.querySelector('.search-button2')
 const favoriteRecipesPage = document.querySelector('.favorite-recipes')
 const favoritePageContainer = document.querySelector('.favorite-recipe-icons')
+const pantryContainer = document.querySelector('.pantry-ingredient-container')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -94,6 +95,7 @@ function fetchUsers() {
   usersData = data.usersData
   let newUserData = usersData[Math.floor(Math.random() * usersData.length)]
   newUser = new User(newUserData)
+  //console.log('newUser', newUser)
   })
 }
 
@@ -102,6 +104,7 @@ function fetchIngredients() {
   .then(response => response.json())
   .then(data =>{
     ingredientsData = data.ingredientsData
+    //console.log(ingredientsData)
   })
 }
 
@@ -140,6 +143,7 @@ function showFavoritesPage() {
   hide(favoritesButton)
   hide(featuredTitle)
   createTags(tagContainer2)
+  userPantryIngredients()
   changeHeader()
   populateFavoriteRecipes()
 }
@@ -308,6 +312,30 @@ function favoriteFilterByName(event) {
         <p>${recipe.name.toUpperCase()}</p>
       </section>`
   })
+}
+
+function userPantryIngredients() {
+  pantryContainer.innerHTML = ''
+  let ingredientUnit;
+  const userPantryIngs = newUser.pantry.map(pantryIngredient => {
+    ingredientsData.forEach(ingredient => {
+      if(ingredient.id === pantryIngredient.ingredient) {
+        recipeData.forEach(recipe => {
+          recipe.ingredients.find(element => {
+            if(ingredient.id === element.id) {
+              ingredientUnit = element.quantity.unit
+            }
+          })
+          })
+        pantryContainer.innerHTML += `<input class="pantry-list "type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
+    <label for="${ingredient.name}">${ingredientUnit} ${ingredient.name}</label><br>`
+    //console.log('ing name', ingredient)
+      }
+    })
+    //want label to be ingredient name
+  })
+  //console.log('pantryings', userPantryIngs)
+  return userPantryIngs
 }
 
 function changeHeader() {
