@@ -36,7 +36,7 @@ h1 {
   justify-content: center;
 }
 
-.search-sidebar {
+.search-sidebar, .pantry-sidebar {
   background-color: #443850;
   margin-right: 5px;
   margin-left: 5px;
