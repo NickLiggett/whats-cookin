@@ -36,7 +36,7 @@ h1 {
   justify-content: center;
 }
 
-.search-sidebar, .pantry-sidebar {
+.search-sidebar {
   background-color: #443850;
   margin-right: 5px;
   margin-left: 5px;
@@ -62,7 +62,7 @@ h1 {
   color: white;
 }
 
-.search-button, .search-button2 {
+.search-button, .search-button2, .add-ingredient-button {
   border: none;
   height: 25px;
   margin-top: 7px;
@@ -74,7 +74,7 @@ h1 {
   color: white;
 }
 
-.button:hover, .search-button:hover, .search-button2:hover {
+.button:hover, .search-button:hover, .search-button2:hover, .add-ingredient-button:hover {
   cursor: pointer;
   background-color: #C0C5C1;
   transition: all 300ms ease-in-out;
@@ -180,12 +180,38 @@ h2 {
 }
 
  #form {
-  height: 90%; 
+  height: 90%;
+  margin-left: 20px;
   overflow-y: auto;
+}
+
+.pantry-sidebar {
+  background-color: #443850;
+  height: 700px;
+  width: 400px;
+  margin-right: 5px;
+}
+
+.add-to-pantry {
+  background-color: #C0C5C1;
+  height: 700px;
+  width: 400px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pantry-list {
   width: 40px;
+}
+
+.pantry-page {
+  display: flex;
+}
+
+.can-you-cook {
+  color: white;
 }
 
 .hidden {
