@@ -93,8 +93,9 @@ class User {
         console.log(reduced.concat(getIngredientsNeeded()))
     }
    }
-  
+ }
 
- 
+
+
 
 export default User
