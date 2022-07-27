@@ -34,7 +34,7 @@ class User {
      }
 
       checkPantry(recipe) {
-        return recipe.ingredients.reduce((list, ingredient) => {
+        let reduced = recipe.ingredients.reduce((list, ingredient) => {
           this.pantry.forEach(element => {
             if (element.ingredient === ingredient.id) {
               let name
@@ -43,37 +43,55 @@ class User {
                   name = ing.name
                 }
               })
-            if (element.amount <= ingredient.quantity.amount) {
-              list.push(`You have enough ${name}!`)
-            } else {
-              list.push(`You need ${element.amount - ingredient.quantity.amount} ${ingredient.quantity.unit} ${name}!`)
+              console.log(ingredient.quantity.amount, element.amount)
+              if (element.amount >= ingredient.quantity.amount) {
+                list.push(`You have enough ${name}!`)
+              } else {
+                list.push(`You need ${ingredient.quantity.amount - element.amount} ${ingredient.quantity.unit} ${name}!`)
+              }
             }
-          }
-        })
-  return list
-}, [])
-        // get names and amounts needed of ingredients in recipes that user both has and does not have in pantry
-        //
-        //
-    //     return recipe.ingredients.reduce((list, ingredient) => {
-    //       this.pantry.forEach(element => {
-    //         let name
-    //         recipe.ingData.forEach(ing => {
-    //           if (ingredient.id === ing.id) {
-    //             name = ing.name
-    //           }
-    //         if (element.ingredient === ingredient.id) {
-    //            if (element.amount.toFixed(2) <= ingredient.quantity.amount.toFixed(2)) {
-    //             list.push(`You need ${element.amount.toFixed(2) - ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit} ${name}!`)
-    //           }
-    //         } else {
-    //           list.push(`You need ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit} ${name}!`)
-    //         }
-    //         }
-    //     })
-    //       return list
-    //     }, []).join('\n')
-    // }
+          })
+          return list
+        }, [])
+        let recipeIngIds = recipe.ingredients.reduce((list, ingredient) => {
+          list.push(ingredient.id)
+          return list
+        }, [])
+        let pantryIngIds = this.pantry.reduce((list, ingredient) => {
+          list.push(ingredient.ingredient)
+          return list
+        }, [])
+       
+        function getIngredientsNeeded() {
+          let needed = []
+          recipeIngIds.forEach(id => {
+            if (!pantryIngIds.includes(id)) {
+              recipe.ingData.find(ingred => {
+                if (ingred.id === id) {
+                  needed.push(ingred.name)
+                }
+              })              
+            }
+          })
+          let amount
+          let units
+          let thing = needed.map(ing => {
+            recipe.ingData.forEach(ingred => {
+              if (ingred.name === ing) {
+                recipe.ingredients.forEach(element => {
+                  if (ingred.id === element.id) {
+                    amount = element.quantity.amount
+                    units = element.quantity.unit
+                  }
+                })
+              }
+            })
+            return `You need ${amount} ${units} ${ing}!`
+          })
+          return thing
+        }
+        console.log(reduced.concat(getIngredientsNeeded()))
+    }
    }
  }
 
