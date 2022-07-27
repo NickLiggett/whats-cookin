@@ -56,7 +56,7 @@ const pantryButton = document.querySelector('#pantryButton')
 const addIngredientName = document.querySelector('.new-ingredient-name')
 const addIngredientAmount = document.querySelector('.new-ingredient-amount')
 const addIngredientUnit = document.querySelector('.new-ingredient-unit')
-const addIngredientButton = document.querySelector('.add-ingredient-button')
+// const addIngredientButton = document.querySelector('.add-ingredient-button')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -89,6 +89,7 @@ searchButton2.addEventListener('click', favoriteFilterByName)
 cookButton.addEventListener('click', cook)
 pantryButton.addEventListener('click', showPantryPage)
 addIngredientButton.addEventListener('click', updatePantry)
+
 
 
 function fetchRecipes() {
@@ -421,7 +422,7 @@ function userPantryIngredients() {
 
 function cook(recipe) {
   if (newUser.checkPantry(recipe).includes("You need")) {
-    hide(cookButton)
+    // hide(cookButton)
     canYouCook.innerText = `Sorry! You cannot cook this recipe. ${'\n'}
     ${newUser.checkPantry(recipe)}`
   } else {

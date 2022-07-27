@@ -43,11 +43,10 @@ class User {
                   name = ing.name
                 }
               })
-              console.log(ingredient.quantity.amount, element.amount)
               if (element.amount >= ingredient.quantity.amount) {
-                list.push(`You have enough ${name}!`)
+                list.push(`- You have enough ${name}.`)
               } else {
-                list.push(`You need ${ingredient.quantity.amount - element.amount} ${ingredient.quantity.unit} ${name}!`)
+                list.push(`* You need ${(ingredient.quantity.amount - element.amount)} ${ingredient.quantity.unit} ${name}.`)
               }
             }
           })
@@ -86,11 +85,11 @@ class User {
                 })
               }
             })
-            return `You need ${amount} ${units} ${ing}!`
+            return `* You need ${amount} ${units} ${ing}.`
           })
           return thing
         }
-        return reduced.concat(getIngredientsNeeded()).join('\n')
+        return reduced.concat(getIngredientsNeeded()).sort().join('\n')
     }
    }
  
