@@ -53,6 +53,10 @@ const cookButton = document.querySelector('#cookButton')
 const canYouCook = document.querySelector('.can-you-cook')
 const pantryPage = document.querySelector('.pantry-page')
 const pantryButton = document.querySelector('#pantryButton')
+const addIngredientName = document.querySelector('.new-ingredient-name')
+const addIngredientAmount = document.querySelector('.new-ingredient-amount')
+const addIngredientUnit = document.querySelector('.new-ingredient-unit')
+const addIngredientButton = document.querySelector('.add-ingredient-button')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -84,6 +88,8 @@ searchButton.addEventListener('click', filterByName)
 searchButton2.addEventListener('click', favoriteFilterByName)
 cookButton.addEventListener('click', cook)
 pantryButton.addEventListener('click', showPantryPage)
+// addIngredientButton.addEventListener('click', function)
+
 
 function fetchRecipes() {
   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes")
@@ -93,6 +99,16 @@ function fetchRecipes() {
   recipeRepository = new RecipeRepository(recipeData)
   })
 }
+
+// function addToPantry() {
+//   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients", { method: 'POST',
+//                   headers: {'Content-Type': 'application/json'},
+//                   body: JSON.stringify({ userID: <number>, ingredientID: <number>, ingredientModification: <number> })
+
+//                   })
+
+// }
+
 
 function fetchUsers() {
   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
@@ -125,6 +141,7 @@ function showViewAllPage() {
   hide(featuredTitle)
   show(pantryButton)
   createTags(tagContainer)
+  hide(pantryPage)
   populateAllRecipes()
   changeHeader()
 }
@@ -139,6 +156,7 @@ function showHomePage() {
   hide(favoriteRecipesPage)
   show(featuredTitle)
   show(pantryButton)
+  hide(pantryPage)
   changeHeader()
 }
 
@@ -371,7 +389,6 @@ function cook(recipe) {
     show(cookButton)
     canYouCook.innerText = `Enjoy your meal! `
   }
-
 }
 
 function changeHeader() {
@@ -381,6 +398,9 @@ function changeHeader() {
     mainHeader.innerText = "What's Cookin?"
   }
 }
+
+
+
 
 function show(element) {
   element.classList.remove('hidden')

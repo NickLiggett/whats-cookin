@@ -90,10 +90,10 @@ class User {
           })
           return thing
         }
-        console.log(reduced.concat(getIngredientsNeeded()))
+        return reduced.concat(getIngredientsNeeded()).join('\n')
     }
    }
- }
+ 
 
 
 
