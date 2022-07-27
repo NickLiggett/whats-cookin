@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import User from '../src/classes/user-class';
 import RecipeRepository from '../src/classes/RecipeRepository'
 import Recipe from '../src/classes/recipe';
+import ingredientsData from '../src/data/ingredients'
 
 describe('User', () => {
     let user;
@@ -40,6 +41,18 @@ describe('User', () => {
           "id": 1123,
           "name": "eggs",
           "estimatedCostInCents": 472
+        }, {
+          "id": 1002030,
+          "name": "black pepper",
+          "estimatedCostInCents": 441
+        }, {
+          "id": 19334,
+          "name": "brown sugar",
+          "estimatedCostInCents": 559
+        }, {
+          "id": 1001,
+          "name": "butter",
+          "estimatedCostInCents": 618
         }]
         recipe1 = { "id": 595736,
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -124,76 +137,6 @@ describe('User', () => {
             "amount": 2,
             "unit": "cups"
           }
-        },
-        {
-          "id": 4582,
-          "quantity": {
-            "amount": 4,
-            "unit": "servings"
-          }
-        },
-        {
-          "id": 2031,
-          "quantity": {
-            "amount": 4,
-            "unit": "teaspoons"
-          }
-        },
-        {
-          "id": 5100,
-          "quantity": {
-            "amount": 1,
-            "unit": "pound"
-          }
-        },
-        {
-          "id": 2009,
-          "quantity": {
-            "amount": 4,
-            "unit": "teaspoons"
-          }
-        },
-        {
-          "id": 1022020,
-          "quantity": {
-            "amount": 4,
-            "unit": "teaspoons"
-          }
-        },
-        {
-          "id": 6168,
-          "quantity": {
-            "amount": 8,
-            "unit": "cups"
-          }
-        },
-        {
-          "id": 9176,
-          "quantity": {
-            "amount": 0.5,
-            "unit": "cup"
-          }
-        },
-        {
-          "id": 2026,
-          "quantity": {
-            "amount": 4,
-            "unit": "teaspoons"
-          }
-        },
-        {
-          "id": 1042047,
-          "quantity": {
-            "amount": 1.5,
-            "unit": "tablespoons"
-          }
-        },
-        {
-          "id": 1042047,
-          "quantity": {
-            "amount": 4,
-            "unit": "teaspoons"
-          }
         }
       ],
       "instructions": [
@@ -210,7 +153,7 @@ describe('User', () => {
     
     recDataSet = [recipe1, recipe2];
     recipeRepo = new RecipeRepository(recDataSet);
-    newRecipe = new Recipe(recipe1, ingDataSet)
+    newRecipe = new Recipe(recipe2, ingDataSet)
 
     })
 
@@ -254,6 +197,6 @@ describe('User', () => {
     
     it('should be able to determine whether a users pantry has enough ingredients to cook a given recipe', () => {
       let e = user.checkPantry(newRecipe)
-      expect(e).to.deep.equal(['You have enough wheat flour!', 'You need 2.5 tsp bicarbonate of soda!', 'You need 7 large eggs!'])
+      expect(e).to.deep.equal()
     })
 })
