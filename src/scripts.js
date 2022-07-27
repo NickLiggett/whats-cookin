@@ -56,7 +56,7 @@ const pantryButton = document.querySelector('#pantryButton')
 const addIngredientName = document.querySelector('.new-ingredient-name')
 const addIngredientAmount = document.querySelector('.new-ingredient-amount')
 const addIngredientUnit = document.querySelector('.new-ingredient-unit')
-const addIngredientButton = document.querySelector('.add-ingredient-button')
+// const addIngredientButton = document.querySelector('.add-ingredient-button')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -88,7 +88,7 @@ searchButton.addEventListener('click', filterByName)
 searchButton2.addEventListener('click', favoriteFilterByName)
 cookButton.addEventListener('click', cook)
 pantryButton.addEventListener('click', showPantryPage)
-// addIngredientButton.addEventListener('click', function)
+// addIngredientButton.addEventListener('click', getIngIdByName)
 
 
 function fetchRecipes() {
@@ -100,14 +100,18 @@ function fetchRecipes() {
   })
 }
 
-// function addToPantry() {
-//   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients", { method: 'POST',
-//                   headers: {'Content-Type': 'application/json'},
-//                   body: JSON.stringify({ userID: <number>, ingredientID: <number>, ingredientModification: <number> })
-
-//                   })
-
+//  function addToPantry() {
+//    fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients", { 
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         body: JSON.stringify({ userID: newUser.id, ingredientID: 123, ingredientModification: 1})
+// })
 // }
+
+function getIngIdByName() {
+  // let result = recipe.ingData.find(addIngredientName.value.toLowerCase())
+  console.log('result')
+}
 
 
 function fetchUsers() {
@@ -117,7 +121,6 @@ function fetchUsers() {
   usersData = data.usersData
   let newUserData = usersData[Math.floor(Math.random() * usersData.length)]
   newUser = new User(newUserData)
-  //console.log('newUser', newUser)
   })
 }
 
@@ -126,7 +129,6 @@ function fetchIngredients() {
   .then(response => response.json())
   .then(data =>{
     ingredientsData = data.ingredientsData
-    //console.log(ingredientsData)
   })
 }
 
@@ -382,7 +384,7 @@ function userPantryIngredients() {
 
 function cook(recipe) {
   if (newUser.checkPantry(recipe).includes("You need")) {
-    hide(cookButton)
+    // hide(cookButton)
     canYouCook.innerText = `Sorry! You cannot cook this recipe. ${'\n'}
     ${newUser.checkPantry(recipe)}`
   } else {
