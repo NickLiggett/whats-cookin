@@ -88,7 +88,8 @@ searchButton.addEventListener('click', filterByName)
 searchButton2.addEventListener('click', favoriteFilterByName)
 cookButton.addEventListener('click', cook)
 pantryButton.addEventListener('click', showPantryPage)
-// addIngredientButton.addEventListener('click', getIngIdByName)
+addIngredientButton.addEventListener('click', updatePantry)
+
 
 
 function fetchRecipes() {
@@ -100,35 +101,71 @@ function fetchRecipes() {
   })
 }
 
-//  function addToPantry() {
-//    fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients", { 
-//         method: 'POST',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify({ userID: newUser.id, ingredientID: 123, ingredientModification: 1})
-// })
-// }
-
-function getIngIdByName() {
-  // let result = recipe.ingData.find(addIngredientName.value.toLowerCase())
-  console.log('result')
+function updatePantry(event) {
+  event.preventDefault()
+  fetchUsersPost()
+  justFetchUsersGet()
 }
 
+function ingredientInput(ingredientName) {
+  let name;
+  ingredientsData.forEach(ing => {
+    if(ing.name === ingredientName) {
+      name = ing.id
+    }
+  })
+  return name
+}
+
+function fetchUsersPost() {
+  fetch("http://localhost:3001/api/v1/users", {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ userID: newUser.id,
+         ingredientID: ingredientInput(addIngredientName.value),
+         ingredientModification: parseInt(addIngredientUnit.value)
+        })
+  })
+  .then(response => response.json())
+  .then(() => {
+    justFetchUsersGet()
+  })
+  .catch(err => console.log(err))
+}
 
 function fetchUsers() {
-  fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users")
+  fetch("http://localhost:3001/api/v1/users")
   .then(response => response.json())
   .then(data => {
-  usersData = data.usersData
+  usersData = data
   let newUserData = usersData[Math.floor(Math.random() * usersData.length)]
   newUser = new User(newUserData)
+  console.log('onload user', newUser)
+  })
+}
+
+function justFetchUsersGet() {
+  fetch("http://localhost:3001/api/v1/users")
+  .then(response => response.json())
+  .then(data => {
+    console.log('new updated user', newUser.id)
+    usersData = data
+    usersData.forEach(user => {
+      if(newUser.id === user.id) {
+        newUser = new User(user)
+      }
+    })
+    userPantryIngredients()
+    console.log('updated data', usersData)
   })
 }
 
 function fetchIngredients() {
-  fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients")
+  fetch("http://localhost:3001/api/v1/ingredients")
   .then(response => response.json())
   .then(data =>{
-    ingredientsData = data.ingredientsData
+    ingredientsData = data
+    //console.log(ingredientsData)
   })
 }
 
@@ -359,6 +396,7 @@ function favoriteFilterByName(event) {
 }
 
 function userPantryIngredients() {
+  console.log('muurrrr')
   pantryContainer.innerHTML = ''
   let ingredientUnit;
   const userPantryIngs = newUser.pantry.map(pantryIngredient => {
