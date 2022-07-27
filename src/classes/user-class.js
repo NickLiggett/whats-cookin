@@ -43,19 +43,41 @@ class User {
                   name = ing.name
                 }
               })
-              if (element.amount <= ingredient.quantity.amount) {
-                list.push(`You have enough ${name}!`)
-              } else {
-                list.push(`You need ${element.amount - ingredient.quantity.amount} ${ingredient.quantity.unit} ${name}!`)
-              }
+            if (element.amount <= ingredient.quantity.amount) {
+              list.push(`You have enough ${name}!`)
+            } else {
+              list.push(`You need ${element.amount - ingredient.quantity.amount} ${ingredient.quantity.unit} ${name}!`)
             }
+          }
         })
-          return list
-        }, [])
-    }
+  return list
+}, [])
+        // get names and amounts needed of ingredients in recipes that user both has and does not have in pantry
+        //
+        //
+    //     return recipe.ingredients.reduce((list, ingredient) => {
+    //       this.pantry.forEach(element => {
+    //         let name
+    //         recipe.ingData.forEach(ing => {
+    //           if (ingredient.id === ing.id) {
+    //             name = ing.name
+    //           }
+    //         if (element.ingredient === ingredient.id) {
+    //            if (element.amount.toFixed(2) <= ingredient.quantity.amount.toFixed(2)) {
+    //             list.push(`You need ${element.amount.toFixed(2) - ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit} ${name}!`)
+    //           }
+    //         } else {
+    //           list.push(`You need ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit} ${name}!`)
+    //         }
+    //         }
+    //     })
+    //       return list
+    //     }, []).join('\n')
+    // }
    }
-  
+ }
 
- 
+
+
 
 export default User

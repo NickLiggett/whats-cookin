@@ -19,6 +19,7 @@
         <button class="button" id="homeButton">HOME</button>
         <button class="button" id="viewAllButton">VIEW ALL RECIPES</button>
         <button class="button" id="favoritesButton">FAVORITE RECIPES</button>
+        <button class="button" id="pantryButton">VIEW PANTRY</button>
       </section>
     </nav>
     <h4 id="featuredTitle">FEATURED RECIPES</h4>
@@ -52,6 +53,8 @@
           $100
         </p>
         <button id="cookButton">Cook Recipe</button>
+        <p class="can-you-cook">
+        </p>
       </aside>
         <img id="recipeDetail" src="https://www.halfbakedharvest.com/wp-content/uploads/2019/05/No-Fuss-Lemon-Tart-1.jpg" alt="random-recipe-image">
         <section class="recipe-directions">
@@ -88,14 +91,25 @@
       </aside>
     <container class="favorite-recipe-icons">
     </container>
-    <aside class="pantry-sidebar">
-      <h3>YOUR PANTRY:</h3>
+    </section>
+    <section class="pantry-page hidden">
+    <section class="pantry-sidebar">
       <form id="form">
-        <h3>Pantry Ingredients:</h3>
+        <h3>PANTRY INGREDIENTS:</h3>
         <container class="pantry-ingredient-container">
         </container>
       </form>
-    </aside>
+    </section>
+    <form class="add-to-pantry" id="form">
+      <h3>ADD TO PANTRY:</h3>
+          <label for="ingredient">Ingredient Name:</label>
+          <input class="new-ingredient-name" type="text"/><br>
+          <label for="ingredient-amount">Amount:</label>
+          <input class="new-ingredient-amount" type="text"/><br>
+          <label for="ingredient-unit">Unit:</label>
+          <input class="new-ingredient-unit" type="text"/><br>
+          <button class="add-ingredient-button">ADD</button>
+    </form>
     </section>
   </body>
   <script src="bundle.js"></script>

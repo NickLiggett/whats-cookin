@@ -49,6 +49,10 @@ const searchButton2 = document.querySelector('.search-button2')
 const favoriteRecipesPage = document.querySelector('.favorite-recipes')
 const favoritePageContainer = document.querySelector('.favorite-recipe-icons')
 const pantryContainer = document.querySelector('.pantry-ingredient-container')
+const cookButton = document.querySelector('#cookButton')
+const canYouCook = document.querySelector('.can-you-cook')
+const pantryPage = document.querySelector('.pantry-page')
+const pantryButton = document.querySelector('#pantryButton')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -78,6 +82,8 @@ homeButton.addEventListener('click', showHomePage)
 favoritesButton.addEventListener('click', showFavoritesPage)
 searchButton.addEventListener('click', filterByName)
 searchButton2.addEventListener('click', favoriteFilterByName)
+cookButton.addEventListener('click', cook)
+pantryButton.addEventListener('click', showPantryPage)
 
 function fetchRecipes() {
   fetch("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes")
@@ -117,6 +123,7 @@ function showViewAllPage() {
   hide(favoriteRecipesPage)
   show(favoritesButton)
   hide(featuredTitle)
+  show(pantryButton)
   createTags(tagContainer)
   populateAllRecipes()
   changeHeader()
@@ -131,6 +138,7 @@ function showHomePage() {
   show(favoritesButton)
   hide(favoriteRecipesPage)
   show(featuredTitle)
+  show(pantryButton)
   changeHeader()
 }
 
@@ -143,9 +151,9 @@ function showFavoritesPage() {
   hide(favoritesButton)
   hide(featuredTitle)
   createTags(tagContainer2)
-  userPantryIngredients()
   changeHeader()
   populateFavoriteRecipes()
+  show(pantryButton)
 }
 
 function showRecipeDetailsPage(event) {
@@ -155,9 +163,24 @@ function showRecipeDetailsPage(event) {
     hide(viewAllPage)
     show(recipeDetailsPage)
     show(viewAllButton)
+    show(pantryButton)
     populateRecipeDetails(event)
   }
     changeHeader()
+}
+
+function showPantryPage() {
+  hide(homePageView)
+  hide(viewAllPage)
+  hide(recipeDetailsPage)
+  hide(favoriteRecipesPage)
+  show(viewAllButton)
+  show(favoritesButton)
+  hide(featuredTitle)
+  show(pantryPage)
+  hide(pantryButton)
+  userPantryIngredients()
+  mainHeader.innerText = `${newUser.name}'s Pantry`
 }
 
 function populateRecipeDetails(event) {
@@ -169,6 +192,7 @@ function populateRecipeDetails(event) {
   recipeInstructions.innerText = `${directions}`
   ingredientNames.innerText = `${recipe.determineIngredientNames()}`
   totalCost.innerText = `${recipe.determineCostOfAllIngredients()}`
+  cook(recipe)
 }
 
 function changeHearts(event) {
@@ -336,6 +360,18 @@ function userPantryIngredients() {
   })
   //console.log('pantryings', userPantryIngs)
   return userPantryIngs
+}
+
+function cook(recipe) {
+  if (newUser.checkPantry(recipe).includes("You need")) {
+    hide(cookButton)
+    canYouCook.innerText = `Sorry! You cannot cook this recipe. ${'\n'}
+    ${newUser.checkPantry(recipe)}`
+  } else {
+    show(cookButton)
+    canYouCook.innerText = `Enjoy your meal! `
+  }
+
 }
 
 function changeHeader() {
