@@ -63,7 +63,7 @@ h1 {
   color: white;
 }
 
-.search-button, .search-button2, .add-ingredient-button {
+.search-button, .search-button2, .add-ingredient-button, #cookButton {
   border: none;
   height: 25px;
   margin-top: 7px;
@@ -73,9 +73,10 @@ h1 {
   font-weight: bold;
   background-color: #7D8491;
   color: white;
+  text-align: center;
 }
 
-.button:hover, .search-button:hover, .search-button2:hover, .add-ingredient-button:hover {
+.button:hover, .search-button:hover, .search-button2:hover, .add-ingredient-button:hover, #cookButton:hover {
   cursor: pointer;
   background-color: #C0C5C1;
   transition: all 300ms ease-in-out;
@@ -85,7 +86,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .recipe-icon-image {

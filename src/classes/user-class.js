@@ -46,7 +46,11 @@ class User {
               if (element.amount >= ingredient.quantity.amount) {
                 list.push(`- You have enough ${name}.`)
               } else {
+                if (ingredient.quantity.amount % 1 === 0) {
                 list.push(`* You need ${(ingredient.quantity.amount - element.amount)} ${ingredient.quantity.unit} ${name}.`)
+              } else {
+                list.push(`* You need ${(ingredient.quantity.amount - element.amount).toFixed(2)} ${ingredient.quantity.unit} ${name}.`)
+              }
               }
             }
           })
@@ -60,7 +64,7 @@ class User {
           list.push(ingredient.ingredient)
           return list
         }, [])
-       
+
         function getIngredientsNeeded() {
           let needed = []
           recipeIngIds.forEach(id => {
@@ -69,7 +73,7 @@ class User {
                 if (ingred.id === id) {
                   needed.push(ingred.name)
                 }
-              })              
+              })
             }
           })
           let amount
@@ -79,7 +83,11 @@ class User {
               if (ingred.name === ing) {
                 recipe.ingredients.forEach(element => {
                   if (ingred.id === element.id) {
+                    if (element.quantity.amount % 1 === 0) {
                     amount = element.quantity.amount
+                  } else {
+                    amount = element.quantity.amount.toFixed(2)
+                  }
                     units = element.quantity.unit
                   }
                 })
@@ -92,7 +100,7 @@ class User {
         return reduced.concat(getIngredientsNeeded()).sort().join('\n')
     }
    }
- 
+
 
 
 
