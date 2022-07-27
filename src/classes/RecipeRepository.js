@@ -5,10 +5,11 @@ class RecipeRepository {
 
   filterTags(tag) {
     let filteredByTag = this.recipes.filter(recipe => {
-      if (recipe.tags.includes(tag)) {
+      if (recipe.tags.includes(...tag)) {
         return recipe
       }
     })
+    console.log(filteredByTag)
       return filteredByTag
   }
 

@@ -58,11 +58,12 @@ const addIngredientName = document.querySelector('.new-ingredient-name')
 const addIngredientAmount = document.querySelector('.new-ingredient-amount')
 const addIngredientButton = document.querySelector('.add-ingredient-button')
 
+
 window.addEventListener('click', function(event) {
   filterByTag(event)
   favoriteFilterByTag(event)
 })
-window.addEventListener('load', function(event) {
+window.addEventListener('load', function() {
   showHomePage()
   fetchUsers()
   fetchRecipes()
@@ -101,12 +102,58 @@ function fetchRecipes() {
   })
 }
 
+function fetchUsersPost() {
+  fetch("http://localhost:3001/api/v1/users", {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ userID: newUser.id,
+         ingredientID: ingredientInput(addIngredientName.value),
+         ingredientModification: parseInt(addIngredientAmount.value)
+        })
+  })
+  .then(response => response.json())
+  .then(() => justFetchUsersGet())
+  .catch(err => console.log(err))
+}
+
+function fetchUsers() {
+  fetch("http://localhost:3001/api/v1/users")
+  .then(response => response.json())
+  .then(data => {
+  usersData = data
+  let newUserData = usersData[Math.floor(Math.random() * usersData.length)]
+  newUser = new User(newUserData)
+  })
+}
+
+function justFetchUsersGet() {
+  fetch("http://localhost:3001/api/v1/users")
+  .then(response => response.json())
+  .then(data => {
+    usersData = data
+    usersData.forEach(user => {
+      if(newUser.id === user.id) {
+        newUser = new User(user)
+      }
+    })
+    userPantryIngredients()
+  })
+}
+
+function fetchIngredients() {
+  fetch("http://localhost:3001/api/v1/ingredients")
+  .then(response => response.json())
+  .then(data =>{
+    ingredientsData = data
+  })
+}
+
 function updatePantry(event) {
   event.preventDefault()
-  addIngredientName.value = ""
-  addIngredientAmount.value = ""
   fetchUsersPost()
   justFetchUsersGet()
+  addIngredientName.value = ""
+  addIngredientAmount.value = ""
 }
 
 function ingredientInput(ingredientName) {
@@ -137,55 +184,7 @@ function startCooking() {
   })
 }
 
-function fetchUsersPost() {
-  fetch("http://localhost:3001/api/v1/users", {
-      method:'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ userID: newUser.id,
-         ingredientID: ingredientInput(addIngredientName.value),
-         ingredientModification: parseInt(addIngredientAmount.value)
-        })
-  })
-  .then(response => response.json())
-  .then(() => justFetchUsersGet())
-  .catch(err => console.log(err))
-}
 
-function fetchUsers() {
-  fetch("http://localhost:3001/api/v1/users")
-  .then(response => response.json())
-  .then(data => {
-  usersData = data
-  let newUserData = usersData[Math.floor(Math.random() * usersData.length)]
-  newUser = new User(newUserData)
-  console.log('onload user', newUser)
-  })
-}
-
-function justFetchUsersGet() {
-  fetch("http://localhost:3001/api/v1/users")
-  .then(response => response.json())
-  .then(data => {
-    console.log('new updated user', newUser.id)
-    usersData = data
-    usersData.forEach(user => {
-      if(newUser.id === user.id) {
-        newUser = new User(user)
-      }
-    })
-    userPantryIngredients()
-    console.log('updated data', usersData)
-  })
-}
-
-function fetchIngredients() {
-  fetch("http://localhost:3001/api/v1/ingredients")
-  .then(response => response.json())
-  .then(data =>{
-    ingredientsData = data
-    //console.log(ingredientsData)
-  })
-}
 
 function showViewAllPage() {
   hide(homePageView)
@@ -349,14 +348,22 @@ function createTags(tagContainer) {
   })
   tagContainer.innerHTML = ''
   uniqueTags.forEach(tag => {
-    tagContainer.innerHTML += `<input type="checkbox" id="${tag}" unchecked>
+    tagContainer.innerHTML += `<input class="checkbox" type="checkbox" id="${tag}">
       <label for="${tag}">${tag}</label><br>`
   })
+  
 }
+let tags = []
 
 function filterByTag(event) {
   if (event.target.type === "checkbox") {
-    let filteredRecipesByTag = recipeRepository.filterTags(event.target.id)
+    if (!tags.includes(event.target.id)) {
+      tags.push(event.target.id)
+    } else if (tags.includes(event.target.id)) {
+      let index = tags.indexOf(event.target.id)
+      tags.splice(index, 1)
+    }
+    let filteredRecipesByTag = recipeRepository.filterTags(tags)
       viewAllPage.childNodes[3].innerHTML = ""
       filteredRecipesByTag.forEach(recipe => {
         viewAllPage.childNodes[3].innerHTML +=
@@ -367,6 +374,7 @@ function filterByTag(event) {
         </section>`
     })
   }
+  console.log(tags)
 }
 
 function favoriteFilterByTag(event) {
