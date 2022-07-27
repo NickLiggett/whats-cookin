@@ -197,8 +197,8 @@ describe('Recipe Repository', () => {
     expect(recipeRepository.recipes).to.deep.equal(recDataSet);
   });
 
-  it('should filter a list of recipes based on a tag', () => {
-    expect(recipeRepository.filterTags("sauce")).to.deep.equal([recipe2])
+  it.only('should filter a list of recipes based on a tag', () => {
+    expect(recipeRepository.filterTags(["sauce", "antipasti"])).to.deep.equal([recipe2, recipe1])
   })
 
   it('should filter a list of recipes based on a name', () => {
