@@ -25,6 +25,7 @@ let recipeRepository
 let usersData
 let ingredientsData
 let newUser
+let recipe
 
 const viewAllButton = document.querySelector('#viewAllButton')
 const homePageView = document.querySelector('.home-page-view')
@@ -55,8 +56,7 @@ const pantryPage = document.querySelector('.pantry-page')
 const pantryButton = document.querySelector('#pantryButton')
 const addIngredientName = document.querySelector('.new-ingredient-name')
 const addIngredientAmount = document.querySelector('.new-ingredient-amount')
-const addIngredientUnit = document.querySelector('.new-ingredient-unit')
-// const addIngredientButton = document.querySelector('.add-ingredient-button')
+const addIngredientButton = document.querySelector('.add-ingredient-button')
 
 window.addEventListener('click', function(event) {
   filterByTag(event)
@@ -86,7 +86,7 @@ homeButton.addEventListener('click', showHomePage)
 favoritesButton.addEventListener('click', showFavoritesPage)
 searchButton.addEventListener('click', filterByName)
 searchButton2.addEventListener('click', favoriteFilterByName)
-cookButton.addEventListener('click', cook)
+cookButton.addEventListener('click', startCooking)
 pantryButton.addEventListener('click', showPantryPage)
 addIngredientButton.addEventListener('click', updatePantry)
 
@@ -103,6 +103,8 @@ function fetchRecipes() {
 
 function updatePantry(event) {
   event.preventDefault()
+  addIngredientName.value = ""
+  addIngredientAmount.value = ""
   fetchUsersPost()
   justFetchUsersGet()
 }
@@ -117,19 +119,35 @@ function ingredientInput(ingredientName) {
   return name
 }
 
+function startCooking() {
+    canYouCook.innerText = `Enjoy your meal!`
+    hide(cookButton)
+    recipe.ingredients.forEach(ingredient => {
+      fetch("http://localhost:3001/api/v1/users", {
+          method:'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ userID: newUser.id,
+             ingredientID: ingredient.id,
+             ingredientModification: -ingredient.quantity.amount
+            })
+          })
+  .then(response => response.json())
+  .then(() => justFetchUsersGet())
+  .catch(err => console.log(err))
+  })
+}
+
 function fetchUsersPost() {
   fetch("http://localhost:3001/api/v1/users", {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ userID: newUser.id,
          ingredientID: ingredientInput(addIngredientName.value),
-         ingredientModification: parseInt(addIngredientUnit.value)
+         ingredientModification: parseInt(addIngredientAmount.value)
         })
   })
   .then(response => response.json())
-  .then(() => {
-    justFetchUsersGet()
-  })
+  .then(() => justFetchUsersGet())
   .catch(err => console.log(err))
 }
 
@@ -242,14 +260,14 @@ function showPantryPage() {
 
 function populateRecipeDetails(event) {
   const getTitle = recipeData.filter(recipe => event.target.src === recipe.image)
-  let recipe = new Recipe(getTitle[0], ingredientsData)
+  recipe = new Recipe(getTitle[0], ingredientsData)
   recipeDetailImage.src = `${event.target.src}`
   recipeDetailTitle.innerText = `${getTitle[0].name}`
   let directions = recipe.listDirections()
   recipeInstructions.innerText = `${directions}`
   ingredientNames.innerText = `${recipe.determineIngredientNames()}`
   totalCost.innerText = `${recipe.determineCostOfAllIngredients()}`
-  cook(recipe)
+  populateCanYouCook(recipe)
 }
 
 function changeHearts(event) {
@@ -420,16 +438,17 @@ function userPantryIngredients() {
   return userPantryIngs
 }
 
-function cook(recipe) {
+function populateCanYouCook(recipe) {
   if (newUser.checkPantry(recipe).includes("You need")) {
-    // hide(cookButton)
+    hide(cookButton)
     canYouCook.innerText = `Sorry! You cannot cook this recipe. ${'\n'}
     ${newUser.checkPantry(recipe)}`
   } else {
     show(cookButton)
-    canYouCook.innerText = `Enjoy your meal! `
+    canYouCook.innerText = `You can cook this recipe!`
   }
 }
+
 
 function changeHeader() {
   if (!favoriteRecipesPage.classList.contains('hidden')) {
