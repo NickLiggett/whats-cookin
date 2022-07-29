@@ -3,14 +3,19 @@ class RecipeRepository {
     this.recipes = recipes
   }
 
-  filterTags(tag) {
-    let filteredByTag = this.recipes.filter(recipe => {
-      if (recipe.tags.includes(...tag)) {
-        return recipe
-      }
+  filterByTags(tags, recipes) {
+    if(tags.length === 0) {
+      return this.recipes
+    }
+    const filteredRecipes = []
+    recipes.forEach(recipe => {
+      tags.forEach(tag => {
+        if(recipe.tags.includes(tag)) {
+          filteredRecipes.push(recipe)
+        }
+      })
     })
-    console.log(filteredByTag)
-      return filteredByTag
+    return filteredRecipes
   }
 
   filterNames(name) {
