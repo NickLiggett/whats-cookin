@@ -57,6 +57,7 @@ const pantryButton = document.querySelector('#pantryButton')
 const addIngredientName = document.querySelector('.new-ingredient-name')
 const addIngredientAmount = document.querySelector('.new-ingredient-amount')
 const addIngredientButton = document.querySelector('.add-ingredient-button')
+const errorMessage = document.querySelector('.error-message')
 
 
 // window.addEventListener('click', function(event) {
@@ -122,10 +123,22 @@ function fetchUsersPost() {
          ingredientModification: parseInt(addIngredientAmount.value)
         })
   })
-  .then(response => response.json())
+
+ 
+  .then(response => { 
+    if (!response.ok) {
+      throw new Error('Please complete the form')
+    } else {
+      errorMessage.innerHTML = ''
+      return response.json()
+    }
+  })
   .then(() => justFetchUsersGet())
-  .catch(err => console.log(err))
+  .catch(err => {
+    errorMessage.innerHTML = `${err.message}`
+  })
 }
+
 
 function fetchUsers() {
   fetch("http://localhost:3001/api/v1/users")
@@ -477,8 +490,6 @@ function changeHeader() {
     mainHeader.innerText = "What's Cookin?"
   }
 }
-
-
 
 
 function show(element) {
