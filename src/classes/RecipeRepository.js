@@ -10,7 +10,7 @@ class RecipeRepository {
     const filteredRecipes = []
     recipes.forEach(recipe => {
       tags.forEach(tag => {
-        if(recipe.tags.includes(tag)) {
+        if(recipe.tags.includes(tag) && !filteredRecipes.includes(recipe)) {
           filteredRecipes.push(recipe)
         }
       })

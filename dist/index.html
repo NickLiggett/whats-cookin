@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@200;500&family=Bitter:wght@600&display=swap" rel="stylesheet">
   </head>
   <body>
     <nav>
@@ -22,17 +23,17 @@
         <button class="button" id="pantryButton">VIEW PANTRY</button>
       </section>
     </nav>
-    <h4 id="featuredTitle">FEATURED RECIPES</h4>
+    <h2 id="featuredTitle">FEATURED RECIPES</h2>
     <section class="home-page-view">
       <div class="container" id="">
         <div class="glide">
           <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
-              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/779583-556x370.jpg"></li>
-              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/721146-556x370.jpg"></li>
-              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/601216-556x370.jpg"></li>
-              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/623855-556x370.jpg"></li>
-              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/615581-556x370.jpg"></li>
+              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/623855-556x370.jpg" alt="featured-recipe-1-image"></li>
+              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/621213-556x370.jpg" alt="featured-recipe-2-image"></li>
+              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/611858-556x370.jpg" alt="featured-recipe-3-image"></li>
+              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/763858-556x370.jpg" alt="featured-recipe-4-image"></li>
+              <li class="glide__slide"><img class="recipe-icon-image" src="https://spoonacular.com/recipeImages/412309-556x370.jpeg" alt="featured-recipe-5-image"></li>
             </ul>
           </div>
           <div class="glide__arrows" data-glide-el="controls">
@@ -102,10 +103,10 @@
     </section>
     <form class="add-to-pantry" id="form">
       <h3>ADD TO PANTRY:</h3>
-          <label for="ingredient">Ingredient Name:</label>
-          <input class="new-ingredient-name" type="text"/><br>
+          <label for="ingredient-name">Ingredient Name:</label>
+          <input id="ingredient-name" class="new-ingredient-name" type="text"/><br>
           <label for="ingredient-amount">Amount:</label>
-          <input class="new-ingredient-amount" type="number"/><br>
+          <input id="ingredient-amount" class="new-ingredient-amount" type="number"/><br>
           <button class="add-ingredient-button">ADD</button>
     </form>
     </section>
