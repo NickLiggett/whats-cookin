@@ -327,7 +327,7 @@ function populateFavoriteRecipes() {
   newUser.recipesToCook.forEach(recipe => {
     favoritePageContainer.innerHTML +=
       `<section class="recipe-icon">
-        <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
+        <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
         <img class="trash-icon" src="./images/trash.png">
         <p>${recipe.name.toUpperCase()}</p>
       </section>`
@@ -337,8 +337,8 @@ function populateFavoriteRecipes() {
 function heartHandler(recipe) {
   viewAllPage.childNodes[3].innerHTML +=
     `<section class="recipe-icon">
-      <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
-      <img class="add-to-favorites-icon" src='./images/heart.png'>
+      <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
+      <img class="add-to-favorites-icon" src='./images/heart.png' alt="not-favorited">
       <p>${recipe.name.toUpperCase()}</p>
     </section>`
 }
@@ -346,8 +346,8 @@ function heartHandler(recipe) {
 function filledHeartHandler(recipe) {
   viewAllPage.childNodes[3].innerHTML +=
     `<section class="recipe-icon">
-      <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
-      <img class="unfavorite" src='./images/filled-heart.png'>
+      <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
+      <img class="unfavorite" src='./images/filled-heart.png' alt="favorited">
       <p>${recipe.name.toUpperCase()}</p>
     </section>`
 }
@@ -362,7 +362,7 @@ function createTags(tagContainer) {
     tagContainer.innerHTML += `<input class="checkbox" type="checkbox" id="${tag}">
       <label for="${tag}">${tag}</label><br>`
   })
-  
+
 }
 
 let tags = []
@@ -375,15 +375,15 @@ function editTags(event) {
   }
 }
 
-function filterRecipes(event) { 
+function filterRecipes(event) {
   if(event.target.classList.contains('checkbox')) {
   const filteredRecipesByTag = recipeRepository.filterByTags(tags, recipeData)
       viewAllPage.childNodes[3].innerHTML = ""
       filteredRecipesByTag.forEach(recipe => {
         viewAllPage.childNodes[3].innerHTML +=
         `<section class="recipe-icon">
-          <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
-          <img class="add-to-favorites-icon" src="./images/heart.png">
+          <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
+          <img class="add-to-favorites-icon" src="./images/heart.png" alt="not-favorited">
           <p>${recipe.name.toUpperCase()}</p>
         </section>`
       })
@@ -397,7 +397,7 @@ function favoriteFilterByTag(event) {
       filteredRecipesByTag.forEach(recipe => {
         favoriteRecipesPage.childNodes[3].innerHTML +=
           `<section class="recipe-icon">
-            <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
+            <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
             <img class='trash-icon' src="./images/trash.png">
             <p>${recipe.name.toUpperCase()}</p>
           </section>`
@@ -413,8 +413,8 @@ function filterByName(event) {
   filteredRecipesByName.forEach(recipe => {
     viewAllPage.childNodes[3].innerHTML +=
       `<section class="recipe-icon">
-        <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
-        <img class="add-to-favorites-icon" src="./images/heart.png">
+        <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
+        <img class="add-to-favorites-icon" src="./images/heart.png" "not-favorited">
         <p>${recipe.name.toUpperCase()}</p>
       </section>`
   })
@@ -427,7 +427,7 @@ function favoriteFilterByName(event) {
   filteredRecipesByName.forEach(recipe => {
     favoriteRecipesPage.childNodes[3].innerHTML +=
       `<section class="recipe-icon">
-        <img class="view-all-recipe-image" src="${recipe.image}" alt="random-recipe-image">
+        <img class="view-all-recipe-image" src="${recipe.image}" alt="${recipe.name} image">
         <img class='trash-icon' src="./images/trash.png">
         <p>${recipe.name.toUpperCase()}</p>
       </section>`
@@ -435,7 +435,6 @@ function favoriteFilterByName(event) {
 }
 
 function userPantryIngredients() {
-  console.log('muurrrr')
   pantryContainer.innerHTML = ''
   let ingredientUnit;
   const userPantryIngs = newUser.pantry.map(pantryIngredient => {
@@ -448,8 +447,8 @@ function userPantryIngredients() {
             }
           })
           })
-        pantryContainer.innerHTML += `<input class="pantry-list "type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
-    <label for="${ingredient.name}">${ingredientUnit} ${ingredient.name}</label><br>`
+        pantryContainer.innerHTML += `<label for="${ingredient.name}"><input class="pantry-list" id="${ingredient.name}" type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
+    ${ingredientUnit} ${ingredient.name}</label><br>`
     //console.log('ing name', ingredient)
       }
     })
