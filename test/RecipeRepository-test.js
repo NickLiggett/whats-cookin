@@ -197,11 +197,24 @@ describe('Recipe Repository', () => {
     expect(recipeRepository.recipes).to.deep.equal(recDataSet);
   });
 
-  it.only('should filter a list of recipes based on a tag', () => {
-    expect(recipeRepository.filterTags(["sauce", "antipasti"])).to.deep.equal([recipe2, recipe1])
+  it('should filter a list of recipes based on a tag', () => {
+    recipeRepository.filterTags("sauce")
+    expect(recipeRepository.filterTags("sauce")).to.deep.equal([recipe2])
+  })
+
+  it('should filter a list of recipes based on multiple tags', () => {
+    recipeRepository.filterTags("sauce")
+    recipeRepository.filterTags("antipasti")
+    expect(recipeRepository.accumulatingFiltedRecipes).to.deep.equal([recipe2, recipe1])
+  })
+
+  it.only('should not filter if there is no tag', () => {
+    expect(recipeRepository.filterTags(" ")).to.deep.equal([recipe1, recipe2])
   })
 
   it('should filter a list of recipes based on a name', () => {
     expect(recipeRepository.filterNames("Dirty Steve's Original Wing Sauce")).to.deep.equal([recipe2])
   })
 })
+
+//["sauce", "antipasti"]

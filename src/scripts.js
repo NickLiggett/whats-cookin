@@ -59,10 +59,20 @@ const addIngredientAmount = document.querySelector('.new-ingredient-amount')
 const addIngredientButton = document.querySelector('.add-ingredient-button')
 
 
-window.addEventListener('click', function(event) {
-  filterByTag(event)
+// window.addEventListener('click', function(event) {
+//   filterByTag(event)
+//   favoriteFilterByTag(event)
+// })
+
+viewAllPage.addEventListener('click', function(event) {
+  editTags(event)
+  filterRecipes(event)
+})
+
+favoriteRecipesPage.addEventListener('click', function(event) {
   favoriteFilterByTag(event)
 })
+
 window.addEventListener('load', function() {
   showHomePage()
   fetchUsers()
@@ -82,6 +92,7 @@ viewAllPage.childNodes[3].addEventListener('click', function(event) {
 favoriteRecipesPage.childNodes[3].addEventListener('click', function(event) {
   deleteRecipe(event)
 })
+
 viewAllButton.addEventListener('click', showViewAllPage)
 homeButton.addEventListener('click', showHomePage)
 favoritesButton.addEventListener('click', showFavoritesPage)
@@ -353,17 +364,20 @@ function createTags(tagContainer) {
   })
   
 }
-let tags = []
 
-function filterByTag(event) {
-  if (event.target.type === "checkbox") {
-    if (!tags.includes(event.target.id)) {
-      tags.push(event.target.id)
-    } else if (tags.includes(event.target.id)) {
-      let index = tags.indexOf(event.target.id)
-      tags.splice(index, 1)
-    }
-    let filteredRecipesByTag = recipeRepository.filterTags(tags)
+let tags = []
+function editTags(event) {
+  if(event.srcElement.checked === true) {
+    tags.push(event.target.id)
+  }
+  else {
+    tags = tags.filter(tag => tag !== event.target.id)
+  }
+}
+
+function filterRecipes(event) { 
+  if(event.target.classList.contains('checkbox')) {
+  const filteredRecipesByTag = recipeRepository.filterByTags(tags, recipeData)
       viewAllPage.childNodes[3].innerHTML = ""
       filteredRecipesByTag.forEach(recipe => {
         viewAllPage.childNodes[3].innerHTML +=
@@ -372,9 +386,8 @@ function filterByTag(event) {
           <img class="add-to-favorites-icon" src="./images/heart.png">
           <p>${recipe.name.toUpperCase()}</p>
         </section>`
-    })
+      })
   }
-  console.log(tags)
 }
 
 function favoriteFilterByTag(event) {
