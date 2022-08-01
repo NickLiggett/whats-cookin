@@ -198,18 +198,17 @@ describe('Recipe Repository', () => {
   });
 
   it('should filter a list of recipes based on a tag', () => {
-    recipeRepository.filterTags("sauce")
-    expect(recipeRepository.filterTags("sauce")).to.deep.equal([recipe2])
+    recipeRepository.filterByTags(["sauce"], recDataSet)
+    expect(recipeRepository.filterByTags(["sauce"], recDataSet)).to.deep.equal([recipe2])
   })
 
   it('should filter a list of recipes based on multiple tags', () => {
-    recipeRepository.filterTags("sauce")
-    recipeRepository.filterTags("antipasti")
-    expect(recipeRepository.accumulatingFiltedRecipes).to.deep.equal([recipe2, recipe1])
+    recipeRepository.filterByTags(["sauce", "antipasti"], recDataSet)
+    expect(recipeRepository.filterByTags(["sauce", "antipasti"], recDataSet)).to.deep.equal([recipe1, recipe2])
   })
 
-  it.only('should not filter if there is no tag', () => {
-    expect(recipeRepository.filterTags(" ")).to.deep.equal([recipe1, recipe2])
+  it('should not filter if there is no tag', () => {
+    expect(recipeRepository.filterByTags("")).to.deep.equal([recipe1, recipe2])
   })
 
   it('should filter a list of recipes based on a name', () => {

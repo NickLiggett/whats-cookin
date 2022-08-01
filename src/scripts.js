@@ -252,6 +252,8 @@ function showFavoritesPage() {
   changeHeader()
   populateFavoriteRecipes()
   show(pantryButton)
+  hide(pantryPage)
+
 }
 
 function showRecipeDetailsPage(event) {
@@ -460,16 +462,14 @@ function userPantryIngredients() {
             }
           })
           })
-        pantryContainer.innerHTML += `<label for="${ingredient.name}"><input class="pantry-list" id="${ingredient.name}" type="number" id="${pantryIngredient.ingredient}" value="${pantryIngredient.amount}">
-    ${ingredientUnit} ${ingredient.name}</label><br>`
-    //console.log('ing name', ingredient)
-      }
-    })
-    //want label to be ingredient name
-  })
+        pantryContainer.innerHTML += `<p class="pantry-list">${pantryIngredient.amount} ${ingredientUnit} ${ingredient.name} </p>`
+  }
+})
   //console.log('pantryings', userPantryIngs)
-  return userPantryIngs
+ })
+ return userPantryIngs
 }
+
 
 function populateCanYouCook(recipe) {
   if (newUser.checkPantry(recipe).includes("You need")) {

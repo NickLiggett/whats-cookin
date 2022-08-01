@@ -130,6 +130,10 @@ h1 {
   padding: 5px;
 }
 
+.add-to-pantry {
+  color: #443850;
+}
+
 h3, #form {
   margin-left: 10px;
   color: white;
@@ -181,7 +185,7 @@ h2 {
 }
 
  #form {
-  height: 90%;
+  height: 700px;
   margin-left: 20px;
   overflow-y: auto;
 }
@@ -194,7 +198,7 @@ h2 {
 }
 
 .add-to-pantry {
-  background-color: #C0C5C1;
+  background-color: #443850;
   height: 700px;
   width: 400px;
   margin-left: 5px;
@@ -204,7 +208,7 @@ h2 {
 }
 
 .pantry-list {
-  width: 40px;
+  width: 90%;
 }
 
 .pantry-page {
@@ -215,6 +219,8 @@ h2 {
   color: white;
   font-weight: bold;
 }
+
+
 
 .hidden {
   display: none;
