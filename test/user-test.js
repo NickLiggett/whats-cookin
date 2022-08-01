@@ -197,6 +197,6 @@ describe('User', () => {
     
     it('should be able to determine whether a users pantry has enough ingredients to cook a given recipe', () => {
       let e = user.checkPantry(newRecipe)
-      expect(e).to.deep.equal()
+      expect(e).to.deep.equal('* You need 2 cups butter.\n* You need 4 teaspoons black pepper.\n* You need 8 tablespoons brown sugar.')
     })
 })
